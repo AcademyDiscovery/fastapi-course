@@ -47,13 +47,6 @@ git --version
 uv --version
 ```
 
-## Step: Clone the repository
-
-```bash
-git clone <your-fork-url>
-cd fastapi
-```
-
 ## Step: Install dependencies
 
 `uv` creates the virtual environment and installs everything in one command:
