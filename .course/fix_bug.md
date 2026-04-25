@@ -9,7 +9,7 @@ A real user reported that FastAPI returns the wrong HTTP status code when a requ
 - **Expected behavior** — a missing required query parameter returns a structured validation error response
 - **Actual behavior** — the response has an unexpected status code
 - **Hint** — the bug is in how FastAPI handles validation errors, not in any route or dependency
-- **Related test** — `tests/test_tutorial/test_bigger_applications/test_main.py`
+- **Related test** — `tests/test_validation_error_status_code.py`
 
 > Take a moment to understand the *symptom* before diving into code. What does the HTTP specification say is the correct status code for a request that fails validation?
 
@@ -33,7 +33,7 @@ grep -rn "RequestValidationError" fastapi/
 Run the specific failing tests to see the error firsthand:
 
 ```bash
-uv run pytest tests/test_tutorial/test_bigger_applications/ -v
+uv run pytest tests/test_validation_error_status_code.py -v
 ```
 
 Read the failure output carefully — it tells you exactly what status code was returned versus what was expected.
@@ -57,7 +57,7 @@ Make your fix, then verify:
 uv run bash scripts/test.sh
 
 # Or run just the affected tests first for a faster feedback loop
-uv run pytest tests/test_tutorial/test_bigger_applications/ -v
+uv run pytest tests/test_validation_error_status_code.py -v
 ```
 
 Check that:
