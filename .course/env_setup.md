@@ -49,14 +49,36 @@ uv --version
 
 ## Step: Install dependencies
 
-`uv` creates the virtual environment and installs everything in one command:
+First, create and activate a virtual environment:
+
+### collapsible: macOS [default-on-macOS]
+
+```bash
+uv venv
+source .venv/bin/activate
+```
+
+### collapsible: Windows [default-on-Windows]
+
+```powershell
+uv venv
+.venv\Scripts\activate
+```
+
+### collapsible: Linux [default-on-Linux]
+
+```bash
+uv venv
+source .venv/bin/activate
+```
+
+Then install all dependencies:
 
 ```bash
 uv sync --extra all
 ```
 
 This will:
-- Create a `.venv` virtual environment automatically
 - Install FastAPI in editable mode (source changes take effect immediately, no reinstall needed)
 - Install all development and test dependencies
 
