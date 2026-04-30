@@ -6,7 +6,7 @@ Get your development environment running so you can work on the FastAPI Workshop
 
 You need Git and `uv` installed on your machine. `uv` manages Python and all project dependencies — no separate Python install required.
 
-### collapsible: macOS [default-on-macOS]
+### collapsible: macOS [default-on-mac]
 
 ```bash
 # Install Homebrew if you don't have it
@@ -17,7 +17,7 @@ brew install git
 brew install uv
 ```
 
-### collapsible: Windows [default-on-Windows]
+### collapsible: Windows [default-on-windows]
 
 1. Install [Git for Windows](https://git-scm.com/download/win)
 2. Install `uv` via PowerShell:
@@ -28,7 +28,7 @@ powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | ie
 
 Open a new terminal (PowerShell or Git Bash) after installation so the `uv` command is available.
 
-### collapsible: Linux [default-on-Linux]
+### collapsible: Linux [default-on-linux]
 
 ```bash
 # Ubuntu/Debian
