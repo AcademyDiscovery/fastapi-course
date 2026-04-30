@@ -51,21 +51,21 @@ uv --version
 
 First, create and activate a virtual environment:
 
-### collapsible: macOS [default-on-macOS]
+### collapsible: macOS [default-on-mac]
 
 ```bash
 uv venv
 source .venv/bin/activate
 ```
 
-### collapsible: Windows [default-on-Windows]
+### collapsible: Windows [default-on-windows]
 
 ```powershell
 uv venv
 .venv\Scripts\activate
 ```
 
-### collapsible: Linux [default-on-Linux]
+### collapsible: Linux [default-on-linux]
 
 ```bash
 uv venv
