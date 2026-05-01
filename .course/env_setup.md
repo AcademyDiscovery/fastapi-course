@@ -1,108 +1,165 @@
-# Phase 1: Environment Setup
+# Environment Setup
 
 Get your development environment running so you can work on the FastAPI Workshop.
 
-## Step: Install prerequisites
+## Why does a project need its own environment?
 
-You need Git and `uv` installed on your machine. `uv` manages Python and all project dependencies — no separate Python install required.
+Every Python project depends on specific versions of external libraries. Without isolation, installing one project's dependencies can break another project on the same machine — or different developers end up with different library versions, causing bugs that are impossible to reproduce.
 
-### collapsible: macOS [default-on-mac]
+A **virtual environment** solves this: it creates a self-contained folder that holds Python and all the libraries for one project. When you activate it, Python commands use that folder instead of whatever is installed globally. This means:
+
+- Your project always runs with exactly the right library versions.
+- You can safely install, upgrade, or remove packages without affecting anything else.
+- Anyone else who clones the repo gets the exact same setup.
+
+In this workshop we use **[`uv`](https://docs.astral.sh/uv/)** — a fast, modern tool that manages both Python itself and your project's virtual environment. You can think of it as a replacement for [pip](https://pip.pypa.io/en/stable/), `venv`, and `pyenv` combined — see the [uv concepts overview](https://docs.astral.sh/uv/concepts/projects/) for a fuller picture.
+
+---
+
+## Install prerequisites
+
+You need two tools before anything else:
+
+- **Git** — for cloning the repository and tracking changes.
+- **[`uv`](https://docs.astral.sh/uv/getting-started/installation/)** — for managing Python and all project dependencies (no separate Python install required).
+
+<details id="prerequisites-macos" class="platform-macos">
+<summary>macOS</summary>
 
 ```bash
-# Install Homebrew if you don't have it
+# Install Homebrew — the standard package manager for macOS.
+# Skip this line if you already have it.
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-# Install Git and uv
+# Install Git and uv via Homebrew
 brew install git
 brew install uv
 ```
 
-### collapsible: Windows [default-on-windows]
+</details>
 
-1. Install [Git for Windows](https://git-scm.com/download/win)
-2. Install `uv` via PowerShell:
+<details id="prerequisites-windows" class="platform-windows">
+<summary>Windows</summary>
+
+1. Download and run the [Git for Windows](https://git-scm.com/download/win) installer.
+2. Install `uv` by running this in PowerShell — it downloads and runs the official installer script:
 
 ```powershell
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
 ```
 
-Open a new terminal (PowerShell or Git Bash) after installation so the `uv` command is available.
+> Open a **new** terminal after installation so the `uv` command becomes available.
 
-### collapsible: Linux [default-on-linux]
+</details>
+
+<details id="prerequisites-linux" class="platform-linux">
+<summary>Linux</summary>
 
 ```bash
-# Ubuntu/Debian
+# Install Git using your distro's package manager (Ubuntu/Debian shown here)
 sudo apt update && sudo apt install -y git
 
-# Install uv
+# Download and run the official uv installer
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-> Restart your terminal (or run `source $HOME/.local/bin/env`) after installing `uv`.
+> Restart your terminal (or run `source $HOME/.local/bin/env`) after installing `uv` so your shell picks it up.
 
-Verify your setup:
+</details>
+
+**Verify both tools are available:**
 
 ```bash
-git --version
-uv --version
+git --version   # should print something like: git version 2.x.x
+uv --version    # should print something like: uv 0.x.x
 ```
 
-## Step: Install dependencies
+---
 
-First, create and activate a virtual environment:
+## Install dependencies
 
-### collapsible: macOS [default-on-mac]
+Now you'll create a virtual environment and install all the libraries the project needs.
+
+**Create and activate the virtual environment:**
+
+<details id="venv-macos" class="platform-macos">
+<summary>macOS</summary>
 
 ```bash
+# Creates a .venv/ folder in your project directory
 uv venv
+
+# Tells your shell to use that folder for Python commands
 source .venv/bin/activate
 ```
 
-### collapsible: Windows [default-on-windows]
+</details>
+
+<details id="venv-windows" class="platform-windows">
+<summary>Windows</summary>
 
 ```powershell
+# Creates a .venv\ folder in your project directory
 uv venv
+
+# Tells your shell to use that folder for Python commands
 .venv\Scripts\activate
 ```
 
-### collapsible: Linux [default-on-linux]
+</details>
+
+<details id="venv-linux" class="platform-linux">
+<summary>Linux</summary>
 
 ```bash
+# Creates a .venv/ folder in your project directory
 uv venv
+
+# Tells your shell to use that folder for Python commands
 source .venv/bin/activate
 ```
 
-Then install all dependencies:
+</details>
+
+Once activated, your terminal prompt will show `(.venv)` — that's how you know it's working.
+
+**Install all project dependencies:**
 
 ```bash
 uv sync --extra all
 ```
 
-This will:
-- Install FastAPI in editable mode (source changes take effect immediately, no reinstall needed)
-- Install all development and test dependencies
+This reads the dependency list declared in [`pyproject.toml`](pyproject.toml) and installs every library at the exact version the project expects. The `--extra all` flag includes optional groups like development tools and test runners. It also installs FastAPI itself in [**editable mode**](https://setuptools.pypa.io/en/latest/userguide/development_mode.html), meaning your source code changes take effect immediately — no reinstall needed.
 
-## Step: Verify everything works
+---
 
-Run the test suite to confirm your setup is working:
+## Verify everything works
+
+Run the test suite to confirm your setup is working end-to-end:
 
 ```bash
 bash scripts/test.sh
 ```
 
-You should see output ending with something like:
+This script sets the right environment variables and runs `pytest` across all test files. A successful setup produces output ending with something like:
 
 ```
 ===== N passed in Xs =====
 ```
 
-> **Note:** Some tests may fail — that's expected! The pre-seeded bugs are already in the code. Your goal is to find and fix them.
+> **Note:** Some tests may fail — that's expected! The workshop includes pre-seeded bugs for you to find and fix. What matters here is that the test runner starts and finishes without a setup error.
 
-You can also run a single test to do a quick sanity check:
+You can also run a single test as a quick sanity check:
 
 ```bash
 PYTHONPATH=./docs_src pytest tests/test_application.py -v
 ```
+
+The `PYTHONPATH=./docs_src` prefix tells Python where to find the tutorial example files that the tests import from.
+
+---
+
+## Setup checklist
 
 - [ ] Git installed and working
 - [ ] `uv` installed and working
@@ -110,7 +167,7 @@ PYTHONPATH=./docs_src pytest tests/test_application.py -v
 - [ ] `uv sync --extra all` succeeds
 - [ ] `bash scripts/test.sh` runs without setup errors
 
-## Footer
+## Useful links
 
 - [uv Documentation](https://docs.astral.sh/uv/)
 - [Git Installation Guide](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
