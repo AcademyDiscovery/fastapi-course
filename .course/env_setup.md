@@ -12,7 +12,7 @@ A **virtual environment** solves this: it creates a self-contained folder that h
 - You can safely install, upgrade, or remove packages without affecting anything else.
 - Anyone else who clones the repo gets the exact same setup.
 
-In this workshop we use **[`uv`](https://docs.astral.sh/uv/)** — a fast, modern tool that manages both Python itself and your project's virtual environment. You can think of it as a replacement for [pip](https://pip.pypa.io/en/stable/), `venv`, and `pyenv` combined — see the [uv concepts overview](https://docs.astral.sh/uv/concepts/projects/) for a fuller picture.
+In this workshop we use **[`uv`](https://docs.astral.sh/uv/)** — a fast, modern tool that manages both Python itself and your project's virtual environment. You can think of it as a replacement for [`pip`](https://pip.pypa.io/en/stable/), `venv`, and `pyenv` combined — see the [uv concepts overview](https://docs.astral.sh/uv/concepts/projects/) for a fuller picture.
 
 ---
 
@@ -121,7 +121,18 @@ source .venv/bin/activate
 
 </details>
 
-Once activated, your terminal prompt will show `(.venv)` — that's how you know it's working.
+**Verify the virtual environment is active:**
+
+Once the virtual environment is activated, your terminal prompt will show `(.venv)` — that's how you know it's working.
+
+Another way to verify is to run:
+
+```bash
+which python   # macOS / Linux
+where python   # Windows
+```
+
+The output should point to the Python inside your `.venv` folder, for example: `/path/to/your/project/.venv/bin/python`
 
 **Install all project dependencies:**
 
@@ -129,7 +140,7 @@ Once activated, your terminal prompt will show `(.venv)` — that's how you know
 uv sync --extra all
 ```
 
-This reads the dependency list declared in [`pyproject.toml`](pyproject.toml) and installs every library at the exact version the project expects. The `--extra all` flag includes optional groups like development tools and test runners. It also installs FastAPI itself in [**editable mode**](https://setuptools.pypa.io/en/latest/userguide/development_mode.html), meaning your source code changes take effect immediately — no reinstall needed.
+This reads the dependency list declared in [`pyproject.toml`](../pyproject.toml) and installs every library at the exact version the project expects. The `--extra all` flag includes optional groups like development tools and test runners. It also installs FastAPI itself in [**editable mode**](https://setuptools.pypa.io/en/latest/userguide/development_mode.html), meaning your source-code changes take effect immediately — no reinstall needed.
 
 ---
 
@@ -167,9 +178,10 @@ The `PYTHONPATH=./docs_src` prefix tells Python where to find the tutorial examp
 - [ ] `uv sync --extra all` succeeds
 - [ ] `bash scripts/test.sh` runs without setup errors
 
+---
+
 ## Useful links
 
 - [uv Documentation](https://docs.astral.sh/uv/)
 - [Git Installation Guide](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 - [FastAPI Contributing Guide](https://fastapi.tiangolo.com/contributing/)
-- [Architecture Overview](../CLAUDE.md)
