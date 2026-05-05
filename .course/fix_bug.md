@@ -27,39 +27,53 @@ uv run pytest tests/test_validation_error_status_code.py -v
 
 Read the failure output carefully — it tells you exactly what status code was returned versus what was expected.
 Look for lines starting with `AssertionError` or `assert` — they show the expected value on one side and the actual
-value on
-the other (e.g., `assert 401 == 422`).
+value on the other.
 
 ## Step 3: Explore the codebase
 
 Now that you've seen the failure, it's time to find the problematic code.
 
 1. Open the failing test file and read what it expects. Look for `assert` statements — they
-   tell you the expected status code and response body. Compare those to what the application actually returns.
-2. Understand what `RequestValidationError` is and how FastAPI handles it.
-3. Follow the path from a validation error being raised to a response being sent.
+   tell you the expected status code and response body.
+2. Now let's see where this code is returned from. In the test body we see only a request to the client that returns a
+   wrong status code. Let's get into the client logic to see where the HTTP code is set.
+3. Let's look closely at the test class itself. Read from the beginning and check out the test file structure. Pay
+   Attention
+   to classes and annotated methods.
+4. What classes of exceptions are processed in those files? How is a test client configured?
 
-To trace this, look up `RequestValidationError` usages. In your IDE, navigate to the class, right-click on it, and
-choose **Find Usages**. If your editor doesn't support that, you can search in the terminal:
+<details id="code-base-exploration-hint" >
+<summary>Open here if you need an answer</summary>
 
-```bash
-# Find where validation errors are referenced in the framework
-grep -rn "RequestValidationError" fastapi/
-```
+The class you need is `RequestValidationError`, that is used in `request_validation_handler`.
+The test client is configured as a set of annotated methods, strating from `app = FastAPI()`.
 
-> **Tip:** FastAPI's architecture separates *raising* an exception from *handling* it. Think about which side of that
-> boundary the bug is on.
+</details> 
+
+5. Follow the path from a validation error being raised to a response being sent.
+
+> **Tip:** There are useful IDE features that can help with that. To find all the usages of clasee, navigate to the
+> class,
+> right-click on it, and choose **Find Usages**.
 
 ## Step 4: Plan your change
 
-Before editing code, decide on the fix:
+Now, when you looked at the test file and explored usages of the `RequestValidationError`, it's time to plan your
+change.
+First, a small architectural hint. FastAPI's architecture separates *raising* an exception from *handling* it. Think
+about which side of that boundary the bug is on.
 
-1. What is the **root cause** — not just the symptom?
-2. What is the **minimal change** needed?
-3. Will your fix break anything else?
+When you planed your fix, verify that:
 
+1. you have found the **root cause** — and not fixing the symptom.
+2. you are introducing the  **minimal change** needed?
+3. that you are not braking anything else.
+
+<details id="code-base-exploration-hint" >
+<summary>I don't get where to write my fix, help needed!</summary>
 By now, your search should have shown you where `RequestValidationError` is handled. That handler is where the status
 code gets set — and that's the file you need to edit.
+</details> 
 
 > **Important:** Don't change the tests. The tests are correct — they describe expected behavior per the HTTP
 > specification and FastAPI's own documentation. Your job is to fix the application code.
@@ -83,8 +97,8 @@ Check that:
 - The fix is a minimal, focused change
 
 > **If you're stuck:** Re-read the error output from pytest — it shows exactly which value was expected and which was
-> actually returned. If that's not enough, try adding `print()` statements in the handler code to inspect what status code
-> is being set and why. Run the targeted test again to see your debug output.
+> actually returned. If that's not enough, try adding `print()` statements in the handler code to inspect what status
+> code is being set and why. Run the targeted test again to see your debug output.
 
 > **Optional:** Can you find other test files that also cover validation error handling? Do they all pass now too? Try
 > searching for `422` in `tests/`.
