@@ -56,11 +56,16 @@ powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | ie
 <details id="prerequisites-linux" class="platform-linux">
 <summary>Linux</summary>
 
+Install Git using your distro's package manager (Ubuntu/Debian shown here):
+
 ```bash
+sudo apt update && sudo apt install -y git
+```
 
-sudo apt update && sudo apt install -y git # Install Git using your distro's package manager (Ubuntu/Debian shown here)
+Download and run the official `uv` installer:
 
-curl -LsSf https://astral.sh/uv/install.sh | sh # Download and run the official uv installer
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
 > Restart your terminal (or run `source $HOME/.local/bin/env`) after installing `uv` so your shell picks it up.
@@ -70,10 +75,11 @@ curl -LsSf https://astral.sh/uv/install.sh | sh # Download and run the official 
 **Verify both tools are available:**
 
 ```bash
-
-git --version   # should print something like: git version 2.x.x
-uv --version    # should print something like: uv 0.x.x
+git --version
+uv --version
 ```
+
+`git --version` should print something like `git version 2.x.x`, and `uv --version` something like `uv 0.x.x`.
 
 ---
 
@@ -86,11 +92,16 @@ Now you'll create a virtual environment and install all the libraries the projec
 <details id="venv-macos" class="platform-macos">
 <summary>macOS</summary>
 
+Create the virtual environment (this creates a `.venv/` folder in your project directory):
+
 ```bash
+uv venv
+```
 
-uv venv # Creates a .venv/ folder in your project directory
+Activate it (tells your shell to use that folder for Python commands):
 
-source .venv/bin/activate # Tells your shell to use that folder for Python commands
+```bash
+source .venv/bin/activate
 ```
 
 </details>
@@ -98,12 +109,15 @@ source .venv/bin/activate # Tells your shell to use that folder for Python comma
 <details id="venv-windows" class="platform-windows">
 <summary>Windows</summary>
 
+Create the virtual environment (this creates a `.venv\` folder in your project directory):
+
 ```powershell
-
-# Creates a .venv\ folder in your project directory
 uv venv
+```
 
-# Tells your shell to use that folder for Python commands
+Activate it (tells your shell to use that folder for Python commands):
+
+```powershell
 .venv\Scripts\activate
 ```
 
@@ -112,11 +126,16 @@ uv venv
 <details id="venv-linux" class="platform-linux">
 <summary>Linux</summary>
 
+Create the virtual environment (this creates a `.venv/` folder in your project directory):
+
 ```bash
+uv venv
+```
 
-uv venv # Creates a .venv/ folder in your project directory
+Activate it (tells your shell to use that folder for Python commands):
 
-source .venv/bin/activate # Tells your shell to use that folder for Python commands
+```bash
+source .venv/bin/activate
 ```
 
 </details>
@@ -128,10 +147,10 @@ Once the virtual environment is activated, your terminal prompt will show `(.ven
 Another way to verify is to run:
 
 ```bash
-
-which python   # macOS / Linux
-where python   # Windows
+which python
 ```
+
+On Windows, use `where python` instead.
 
 The output should point to the Python inside your `.venv` folder, for example: `/path/to/your/project/.venv/bin/python`
 
