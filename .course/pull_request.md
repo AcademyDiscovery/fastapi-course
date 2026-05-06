@@ -205,15 +205,13 @@ Once you clone your fork, your local repo knows about one remote by default: `or
 
 To stay up to date with changes in the original repo, you add a second remote called `upstream`:
 
-```bash
-
+```
 git remote add upstream https://github.com/fastapi/fastapi.git
 ```
 
 Fetch and merge the latest changes from the original before starting new work:
 
-```bash
-
+```
 git fetch upstream
 git merge upstream/main
 ```
