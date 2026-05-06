@@ -59,12 +59,14 @@ powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | ie
 Install Git using your distro's package manager (Ubuntu/Debian shown here):
 
 ```bash
+
 sudo apt update && sudo apt install -y git
 ```
 
 Download and run the official `uv` installer:
 
 ```bash
+
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
@@ -75,6 +77,7 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 **Verify both tools are available:**
 
 ```bash
+
 git --version
 uv --version
 ```
@@ -95,12 +98,14 @@ Now you'll create a virtual environment and install all the libraries the projec
 Create the virtual environment (this creates a `.venv/` folder in your project directory):
 
 ```bash
+
 uv venv
 ```
 
 Activate it (tells your shell to use that folder for Python commands):
 
 ```bash
+
 source .venv/bin/activate
 ```
 
@@ -112,12 +117,14 @@ source .venv/bin/activate
 Create the virtual environment (this creates a `.venv\` folder in your project directory):
 
 ```powershell
+
 uv venv
 ```
 
 Activate it (tells your shell to use that folder for Python commands):
 
 ```powershell
+
 .venv\Scripts\activate
 ```
 
@@ -129,12 +136,14 @@ Activate it (tells your shell to use that folder for Python commands):
 Create the virtual environment (this creates a `.venv/` folder in your project directory):
 
 ```bash
+
 uv venv
 ```
 
 Activate it (tells your shell to use that folder for Python commands):
 
 ```bash
+
 source .venv/bin/activate
 ```
 
@@ -147,6 +156,7 @@ Once the virtual environment is activated, your terminal prompt will show `(.ven
 Another way to verify is to run:
 
 ```bash
+
 which python
 ```
 
