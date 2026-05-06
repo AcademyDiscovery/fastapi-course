@@ -27,6 +27,7 @@ You need two tools before anything else:
 <summary>macOS</summary>
 
 ```bash
+
 # Install Homebrew — the standard package manager for macOS.
 # Skip this line if you already have it.
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -45,6 +46,7 @@ brew install uv
 2. Install `uv` by running this in PowerShell — it downloads and runs the official installer script:
 
 ```powershell
+
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
 ```
 
@@ -56,6 +58,7 @@ powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | ie
 <summary>Linux</summary>
 
 ```bash
+
 # Install Git using your distro's package manager (Ubuntu/Debian shown here)
 sudo apt update && sudo apt install -y git
 
@@ -70,6 +73,7 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 **Verify both tools are available:**
 
 ```bash
+
 git --version   # should print something like: git version 2.x.x
 uv --version    # should print something like: uv 0.x.x
 ```
@@ -86,6 +90,7 @@ Now you'll create a virtual environment and install all the libraries the projec
 <summary>macOS</summary>
 
 ```bash
+
 # Creates a .venv/ folder in your project directory
 uv venv
 
@@ -99,6 +104,7 @@ source .venv/bin/activate
 <summary>Windows</summary>
 
 ```powershell
+
 # Creates a .venv\ folder in your project directory
 uv venv
 
@@ -112,6 +118,7 @@ uv venv
 <summary>Linux</summary>
 
 ```bash
+
 # Creates a .venv/ folder in your project directory
 uv venv
 
@@ -128,6 +135,7 @@ Once the virtual environment is activated, your terminal prompt will show `(.ven
 Another way to verify is to run:
 
 ```bash
+
 which python   # macOS / Linux
 where python   # Windows
 ```
@@ -137,6 +145,7 @@ The output should point to the Python inside your `.venv` folder, for example: `
 **Install all project dependencies:**
 
 ```bash
+
 uv sync --extra all
 ```
 
@@ -149,6 +158,7 @@ This reads the dependency list declared in [`pyproject.toml`](../pyproject.toml)
 Run the test suite to confirm your setup is working end-to-end:
 
 ```bash
+
 bash scripts/test.sh
 ```
 
@@ -163,6 +173,7 @@ This script sets the right environment variables and runs `pytest` across all te
 You can also run a single test as a quick sanity check:
 
 ```bash
+
 PYTHONPATH=./docs_src pytest tests/test_application.py -v
 ```
 

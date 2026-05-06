@@ -20,6 +20,7 @@ A **pull request** is a proposal: "here are the changes I made, please review th
 ## Create a feature branch
 
 ```bash
+
 git checkout -b fix/validation-status-code
 ```
 
@@ -28,6 +29,7 @@ git checkout -b fix/validation-status-code
 Confirm you're on the right branch:
 
 ```bash
+
 git branch
 ```
 
@@ -44,6 +46,7 @@ Git tracks changes in two steps: **staging** (choosing what to include) and **co
 **Review what you changed:**
 
 ```bash
+
 git diff
 ```
 
@@ -52,6 +55,7 @@ This shows every line you added or removed since the last commit. Read through i
 **Stage only the files you meant to change:**
 
 ```bash
+
 git add <file-you-changed>
 ```
 
@@ -60,6 +64,7 @@ Avoid `git add .` until you're sure everything in the working directory belongs 
 **Verify what's staged:**
 
 ```bash
+
 git status
 ```
 
@@ -68,6 +73,7 @@ Files listed under *Changes to be committed* will go into the next commit. Files
 **Write a clear commit message:**
 
 ```bash
+
 git commit -m "Fix: return 404 when requested item does not exist"
 ```
 
@@ -101,6 +107,7 @@ Types: `Fix`, `Feat`, `Refactor`, `Test`, `Docs`, `Chore`.
 Your commit lives only on your local machine until you push it:
 
 ```bash
+
 git push origin fix/validation-status-code
 ```
 
@@ -142,6 +149,7 @@ After you open the PR, GitHub runs automated checks — linting, type checks, an
 Run the same checks locally first to catch problems before the CI bots do:
 
 ```bash
+
 # Run the full test suite
 uv run bash scripts/test.sh
 
@@ -156,6 +164,7 @@ uv run bash scripts/lint.sh
 3. Commit and push again — the PR automatically picks up the new commit:
 
 ```bash
+
 git add <files-you-changed>
 git commit -m "Fix: <what you changed>"
 git push origin fix/validation-status-code
@@ -197,12 +206,14 @@ Once you clone your fork, your local repo knows about one remote by default: `or
 To stay up to date with changes in the original repo, you add a second remote called `upstream`:
 
 ```bash
+
 git remote add upstream https://github.com/fastapi/fastapi.git
 ```
 
 Fetch and merge the latest changes from the original before starting new work:
 
 ```bash
+
 git fetch upstream
 git merge upstream/main
 ```
