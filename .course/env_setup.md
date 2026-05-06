@@ -25,14 +25,13 @@ You need two tools before anything else:
 
 <details id="prerequisites-macos" class="platform-macos">
 <summary>macOS</summary>
+Install Homebrew — the standard package manager for macOS.
+Skip this line if you already have it.
 
 ```bash
 
-# Install Homebrew — the standard package manager for macOS.
-# Skip this line if you already have it.
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-# Install Git and uv via Homebrew
 brew install git
 brew install uv
 ```
@@ -59,11 +58,9 @@ powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | ie
 
 ```bash
 
-# Install Git using your distro's package manager (Ubuntu/Debian shown here)
-sudo apt update && sudo apt install -y git
+sudo apt update && sudo apt install -y git # Install Git using your distro's package manager (Ubuntu/Debian shown here)
 
-# Download and run the official uv installer
-curl -LsSf https://astral.sh/uv/install.sh | sh
+curl -LsSf https://astral.sh/uv/install.sh | sh # Download and run the official uv installer
 ```
 
 > Restart your terminal (or run `source $HOME/.local/bin/env`) after installing `uv` so your shell picks it up.
@@ -91,11 +88,9 @@ Now you'll create a virtual environment and install all the libraries the projec
 
 ```bash
 
-# Creates a .venv/ folder in your project directory
-uv venv
+uv venv # Creates a .venv/ folder in your project directory
 
-# Tells your shell to use that folder for Python commands
-source .venv/bin/activate
+source .venv/bin/activate # Tells your shell to use that folder for Python commands
 ```
 
 </details>
@@ -119,11 +114,9 @@ uv venv
 
 ```bash
 
-# Creates a .venv/ folder in your project directory
-uv venv
+uv venv # Creates a .venv/ folder in your project directory
 
-# Tells your shell to use that folder for Python commands
-source .venv/bin/activate
+source .venv/bin/activate # Tells your shell to use that folder for Python commands
 ```
 
 </details>
