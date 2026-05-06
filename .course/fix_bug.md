@@ -40,14 +40,16 @@ Before you start digging, here's an important architectural concept: FastAPI sep
 from *handling* it. An exception handler receives the error and builds the HTTP response — including the status code.
 Keep this in mind as you trace through the code.
 
-1. Open the failing test file and read what it expects. Look for `assert` statements — they
+1. Open the failing test file and read what it expects. If you're not sure where it is, use
+   [Search Everywhere](project-hub://search-everywhere) to locate it by name. Look for `assert` statements — they
    tell you the expected status code and response body.
 2. Let's look closely at the test file structure. Read from the beginning and check out
    decorated methods — those are functions with `@app.something(...)` above them, like `@app.exception_handler(...)`.
 3. What classes of exceptions are processed in the test file? How is a test client configured?
 4. Now let's trace from the test request to the *server-side code* that produces the response.
    Look at the import statements at the top of the test file — they show you which application modules are involved.
-   Use them to navigate to the handler that builds the HTTP response.
+   Use them to navigate to the handler that builds the HTTP response. You can also use
+   [Find in Files](project-hub://search) to search for a class or symbol name across the codebase.
 
 <details id="code-base-exploration-hint" >
 <summary>Open here if you need an answer</summary>
