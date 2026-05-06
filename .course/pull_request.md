@@ -218,6 +218,8 @@ git merge upstream/main
 
 This keeps your fork in sync and avoids merge conflicts when you open a PR.
 
+> **Note:** The commands above are for illustration only — do not run them in this project. This repository is not a fork, so there is no upstream to add.
+
 ### Opening the PR
 
 When you push your branch and open a PR on GitHub, you'll need to set:
