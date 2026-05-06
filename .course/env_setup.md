@@ -172,11 +172,11 @@ The `PYTHONPATH=./docs_src` prefix tells Python where to find the tutorial examp
 
 ## Setup checklist
 
-- [ ] Git installed and working
-- [ ] `uv` installed and working
-- [ ] Repository cloned
-- [ ] `uv sync --extra all` succeeds
-- [ ] `bash scripts/test.sh` runs without setup errors
+- Git installed and working
+- `uv` installed and working
+- Repository cloned
+- `uv sync --extra all` succeeds
+- `bash scripts/test.sh` runs without setup errors
 
 ---
 
