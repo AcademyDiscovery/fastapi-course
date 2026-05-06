@@ -201,6 +201,8 @@ The full open-source workflow looks like this:
 
 ### Two remotes: `origin` and `upstream`
 
+> **Note:** The commands below are for illustration only — do not run them in this project. This repository is not a fork, so there is no upstream to add.
+
 Once you clone your fork, your local repo knows about one remote by default: `origin`, which points to your fork.
 
 To stay up to date with changes in the original repo, you add a second remote called `upstream`:
@@ -217,8 +219,6 @@ git merge upstream/main
 ```
 
 This keeps your fork in sync and avoids merge conflicts when you open a PR.
-
-> **Note:** The commands above are for illustration only — do not run them in this project. This repository is not a fork, so there is no upstream to add.
 
 ### Opening the PR
 
