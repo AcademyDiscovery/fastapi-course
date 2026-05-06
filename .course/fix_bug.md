@@ -1,4 +1,4 @@
-# Phase 2: Fixing the bug
+# Fixing the bug
 
 If you completed Phase 1, you should have seen some test failures in your output. Our users are very attentive too
 and had already filed an issue. It's on GitHub, let's go and see.
@@ -8,7 +8,7 @@ you already have when reading it for the first time.
 
 [Open the issue]($issueLink)
 
-## Step 1: Understand the issue
+## Understand the issue
 
 So you have read the issue. Now let's make sure the issue description is clear.
 
@@ -16,11 +16,12 @@ First, what exactly is the problem: is it wrong logic in production code, wrong 
 What is expected behavior? What is actual? Write down your answers — even a
 single sentence for each. You'll need them when you write your PR description later.
 
-## Step 2: Reproduce the problem
+## Reproduce the problem
 
 Before diving into the code, let's isolate the specific failing test by running:
 
 ```bash
+
 uv run pytest tests/test_validation_error_status_code.py -v
 ```
 
@@ -31,7 +32,7 @@ value on the other.
 > **Note:** If the test passes instead of failing, make sure you're on the correct branch and haven't already applied
 > a fix.
 
-## Step 3: Explore the codebase
+## Explore the codebase
 
 Now that you've seen the failure, it's time to find the problematic code.
 
@@ -63,7 +64,7 @@ The test client is configured as a set of decorated methods, starting from `app 
 > **Tip:** There are useful IDE features that can help with that. To find all the usages of a class, navigate to the
 > class, right-click on it, and choose **Find Usages**.
 
-## Step 4: Plan your change
+## Plan your change
 
 Now, when you looked at the test file and explored usages of the `RequestValidationError`, it's time to plan your
 change. Think about the raising-vs-handling separation you learned about earlier — which side of that boundary is the
@@ -84,17 +85,19 @@ code gets set — and that's the file you need to edit.
 > **Important:** Don't change the tests. The tests are correct — they describe expected behavior per the HTTP
 > specification and FastAPI's own documentation. Your job is to fix the application code.
 
-## Step 5: Implement and test
+## Implement and test
 
 Before editing any code, create a new branch for your fix:
 
 ```bash
+
 git checkout -b fix/validation-status-code
 ```
 
 Make your fix, then verify:
 
 ```bash
+
 # Run just the affected tests first for a faster feedback loop
 uv run pytest tests/test_validation_error_status_code.py -v
 
