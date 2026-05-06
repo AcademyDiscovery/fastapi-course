@@ -12,7 +12,7 @@ A **virtual environment** solves this: it creates a self-contained folder that h
 - You can safely install, upgrade, or remove packages without affecting anything else.
 - Anyone else who clones the repo gets the exact same setup.
 
-In this workshop we use **[`uv`](https://docs.astral.sh/uv/)** — a fast, modern tool that manages both Python itself and your project's virtual environment. You can think of it as a replacement for [`pip`](https://pip.pypa.io/en/stable/), `venv`, and `pyenv` combined — see the [uv concepts overview](https://docs.astral.sh/uv/concepts/projects/) for a fuller picture.
+In this workshop we use **[`uv`](https://docs.astral.sh/uv/)** — a fast, modern tool that manages both Python itself and your project's virtual environment. You can think of it as a replacement for [pip](https://pip.pypa.io/en/stable/), `venv`, and `pyenv` combined — see the [uv concepts overview](https://docs.astral.sh/uv/concepts/projects/) for a fuller picture.
 
 ---
 
