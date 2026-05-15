@@ -39,9 +39,9 @@ Now that you've seen the failure, it's time to find the problematic code.
 The test told you what status code it *expected* — now search the codebase for where that status code is set.
 
 1. Open the failing test file and read what it expects. If you're not sure where it is, use
-   [Search Everywhere](project-hub://search-everywhere) to locate it by name. Look for `assert` statements — they
+   [Search Everywhere](project-hub://search-everywhere) (<kbd>Shift</kbd><kbd>Shift</kbd>) to locate it by name. Look for `assert` statements — they
    tell you the expected status code and response body.
-2. You now know the status code the test expects. Use [Find in Files](project-hub://search) to search for the
+2. You now know the status code the test expects. Use [Find in Files](project-hub://search) (<kbd>⌘</kbd><kbd>Shift</kbd><kbd>F</kbd>) to search for the
    *wrong* status code that is currently being returned — it must be set somewhere in the application code.
    Search for it as a plain number (e.g. `400`) and look through the results to find where it is returned for
    validation errors. You can use the **File Mask** field (e.g. `*.py`) to limit results to Python files and
@@ -57,7 +57,7 @@ You should find it inside a handler function in the `fastapi/` source directory 
 
 </details>
 
-> **Tip:** [Find in Files](project-hub://search) searches across the whole codebase at once — it's much faster than
+> **Tip:** [Find in Files](project-hub://search) (<kbd>⌘</kbd><kbd>Shift</kbd><kbd>F</kbd>) searches across the whole codebase at once — it's much faster than
 > opening files one by one. Try searching for the numeric status code to narrow down
 > the right handler quickly. Use the **File Mask** field (e.g. `*.py`) to skip non-Python files and keep results
 > manageable.
