@@ -103,6 +103,13 @@ uv --version
 
 Now you'll create a virtual environment and install all the libraries the project needs.
 
+**Change to the project directory:**
+
+```bash
+
+cd <$WORKDIR>
+```
+
 **Create and activate the virtual environment:**
 
 <details id="venv-macos" class="platform-macos">
