@@ -25,14 +25,27 @@ You need two tools before anything else:
 
 <details id="prerequisites-macos" class="platform-macos">
 <summary>macOS</summary>
-Install Homebrew — the standard package manager for macOS.
-Skip this line if you already have it.
+
+If you already have Git and Homebrew installed, skip to the `uv` step below.
+
+Install Homebrew — the standard package manager for macOS:
 
 ```bash
 
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+Install Git:
+
+```bash
 
 brew install git
+```
+
+Finally, install `uv`:
+
+```bash
+
 brew install uv
 ```
 
