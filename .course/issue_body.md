@@ -6,6 +6,8 @@ This is incorrect — `401` means the client is not authenticated, whereas `422`
 
 ## Steps to reproduce
 
+Save the following to a file named `main.py`:
+
 ```python
 from fastapi import FastAPI
 
@@ -15,6 +17,14 @@ app = FastAPI()
 def read_items(token: str):
     return {"token": token}
 ```
+
+Start the server:
+
+```bash
+fastapi run main.py
+```
+
+Then send a request without the required query parameter:
 
 ```bash
 curl -i http://localhost:8000/items
