@@ -36,41 +36,35 @@ value on the other.
 
 Now that you've seen the failure, it's time to find the problematic code.
 
-Before you start digging, here's an important architectural concept: FastAPI separates *raising* an exception
-from *handling* it. An exception handler receives the error and builds the HTTP response — including the status code.
-Keep this in mind as you trace through the code.
+The test told you what status code it *expected* — now search the codebase for where that status code is set.
 
 1. Open the failing test file and read what it expects. If you're not sure where it is, use
    [Search Everywhere](project-hub://search-everywhere) to locate it by name. Look for `assert` statements — they
    tell you the expected status code and response body.
-2. Let's look closely at the test file structure. Read from the beginning and check out
-   decorated methods — those are functions with `@app.something(...)` above them, like `@app.exception_handler(...)`.
-3. What classes of exceptions are processed in the test file? How is a test client configured?
-4. Now let's trace from the test request to the *server-side code* that produces the response.
-   Look at the import statements at the top of the test file — they show you which application modules are involved.
-   Use them to navigate to the handler that builds the HTTP response. You can also use
-   [Find in Files](project-hub://search) to search for a class or symbol name across the codebase.
+2. You now know the status code the test expects. Use [Find in Files](project-hub://search) to search for the
+   *wrong* status code that is currently being returned — it must be set somewhere in the application code.
+   Search for it as a plain number (e.g. `400`) and look through the results to find where it is returned for
+   validation errors. You can use the **File Mask** field (e.g. `*.py`) to limit results to Python files and
+   cut through the noise.
+3. Open that file and read the surrounding code. You should see a function that builds an HTTP response — that's
+   the place where the status code needs to change.
 
 <details id="code-base-exploration-hint" >
 <summary>Open here if you need an answer</summary>
 
-The class you need is `RequestValidationError`, that is used in `request_validation_handler`.
-The test client is configured as a set of decorated methods, starting from `app = FastAPI()`.
+Search for the status code number that the test currently receives (shown in the assertion failure output).
+You should find it inside a handler function in the `fastapi/` source directory — that is the file you need to edit.
 
-</details> 
+</details>
 
-5. Follow the path from where `RequestValidationError` is raised to where it is caught and
-   turned into an HTTP response. The handler that catches it is what constructs the response —
-   including the status code.
-
-> **Tip:** There are useful IDE features that can help with that. To find all the usages of a class, navigate to the
-> class, right-click on it, and choose **Find Usages**.
+> **Tip:** [Find in Files](project-hub://search) searches across the whole codebase at once — it's much faster than
+> opening files one by one. Try searching for the numeric status code to narrow down
+> the right handler quickly. Use the **File Mask** field (e.g. `*.py`) to skip non-Python files and keep results
+> manageable.
 
 ## Plan your change
 
-Now, when you looked at the test file and explored usages of the `RequestValidationError`, it's time to plan your
-change. Think about the raising-vs-handling separation you learned about earlier — which side of that boundary is the
-bug on?
+Now that you've found the handler that sets the status code, it's time to plan your change.
 
 When you planed your fix, verify that:
 
@@ -80,8 +74,7 @@ When you planed your fix, verify that:
 
 <details id="fix-location-hint" >
 <summary>I don't get where to write my fix, help needed!</summary>
-By now, your search should have shown you where `RequestValidationError` is handled. That handler is where the status
-code gets set — and that's the file you need to edit.
+By now, your search should have shown you the handler where the status code gets set — that's the file you need to edit.
 </details> 
 
 > **Important:** Don't change the tests. The tests are correct — they describe expected behavior per the HTTP
